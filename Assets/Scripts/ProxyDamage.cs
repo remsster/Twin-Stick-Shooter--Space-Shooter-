@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ProxyDamage : MonoBehaviour
 {
-    // Damage per second
+    // Damage per second to the player
     public float DamageRate = 10f;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Health health = other.gameObject.GetComponent<Health>();
 

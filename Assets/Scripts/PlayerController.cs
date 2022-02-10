@@ -11,12 +11,36 @@ public class PlayerController : MonoBehaviour
     public float MaxSpeed = 5f;
     private Rigidbody rb = null;
 
+    public bool CanFire = true;
+    public float ReloadDelay = .3f;
+
+
+    public Transform[] TurretTransforms;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+    private void Update()
+    {
+        if (Input.GetButtonDown(Fire1))
+        {
+            if (CanFire)
+            {
+
+            //foreach (Transform T in TurretTransforms)
+            //{
+            //    AmmoManager.SpawnAmmo(T.position, T.rotation);
+            //}
+            AmmoManager.SpawnAmmo(TurretTransforms[0].position, TurretTransforms[0].rotation);
+
+            CanFire = false;
+            Invoke("EnableFire", ReloadDelay);
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         float Hori = Input.GetAxis(HoriAxis);
@@ -36,6 +60,12 @@ public class PlayerController : MonoBehaviour
             Vector3 LookDirection = MousePosWorld - transform.position;
             transform.localRotation = Quaternion.LookRotation(LookDirection, Vector3.up);
         }
+
         
+    }
+
+    private void EnableFire()
+    {
+        CanFire = true;
     }
 }
