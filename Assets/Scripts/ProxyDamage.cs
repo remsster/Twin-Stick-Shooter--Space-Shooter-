@@ -7,7 +7,7 @@ public class ProxyDamage : MonoBehaviour
     // Damage per second to the player
     public float DamageRate = 10f;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         Health health = other.gameObject.GetComponent<Health>();
 
